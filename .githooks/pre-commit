@@ -2,6 +2,9 @@
 # Cadena de calidad obligatoria: Formatter -> Linter -> Pruebas unitarias.
 # Activación (una vez por clon): git config core.hooksPath .githooks
 
+# La consola de Windows no usa UTF-8 por defecto y desfigura acentos y emojis.
+export PYTHONIOENCODING=utf-8
+
 if [ -x .venv/Scripts/python.exe ]; then
     PY=.venv/Scripts/python.exe
 elif [ -x .venv/bin/python ]; then
