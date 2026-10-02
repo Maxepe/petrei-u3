@@ -1,0 +1,34 @@
+name: calidad
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Instalar herramientas de calidad
+        run: pip install -r requirements-dev.txt
+
+      - name: Formatter
+        run: black --check --diff src tests
+
+      - name: Linter
+        run: ruff check src tests
+
+      - name: Instalar dependencias del proyecto
+        run: pip install -r requirements.txt
+
+      - name: Pruebas unitarias y cobertura
+        run: pytest
+
+      - name: Seguridad de dependencias
+        run: pip-audit -r requirements.txt

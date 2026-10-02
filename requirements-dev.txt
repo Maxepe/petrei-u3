@@ -1,0 +1,6 @@
+black==26.5.1
+ruff==0.16.10
+pytest==9.1.1
+pytest-cov==7.1.0
+pip-audit==2.10.1
+radon==6.0.1

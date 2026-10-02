@@ -3,5 +3,26 @@ name = "tienda"
 version = "0.1.0"
 requires-python = ">=3.14"
 
+[tool.black]
+line-length = 88
+target-version = ["py314"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+# E/F: pycodestyle y pyflakes · B: bugbear · S: seguridad (bandit)
+# C90: complejidad ciclomática · SIM: simplificables · PL: pylint
+select = ["E", "F", "B", "S", "C90", "SIM", "PL"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+# assert y valores literales son propios de un test
+"tests/*" = ["S101", "PLR2004"]
+
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+addopts = "--cov=tienda --cov-branch --cov-report=term-missing --cov-report=json --cov-report=xml --cov-report=html --cov-fail-under=80"
