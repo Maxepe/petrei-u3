@@ -1,0 +1,21 @@
+# git checkout linea-base
+$ ruff check --statistics src tests
+15	PLR2004	[ ] magic-value-comparison
+10	SIM108 	[ ] if-else-block-instead-of-if-exp
+ 4	PLR5501	[*] collapsible-else-if
+ 2	C901   	[ ] complex-structure
+ 2	PLR0912	[ ] too-many-branches
+ 2	E712   	[ ] true-false-comparison
+ 1	E722   	[ ] bare-except
+ 1	SIM102 	[ ] collapsible-if
+ 1	E711   	[ ] none-comparison
+ 1	SIM115 	[ ] open-file-with-context-handler
+ 1	S501   	[ ] request-with-no-cert-validation
+ 1	S113   	[ ] request-without-timeout
+ 1	SIM105 	[ ] suppressible-exception
+ 1	PLR0915	[ ] too-many-statements
+ 1	S110   	[ ] try-except-pass
+ 1	S506   	[ ] unsafe-yaml-load
+ 1	F401   	[*] unused-import
+Found 46 errors.
+[*] 5 fixable with the `--fix` option (15 hidden fixes can be enabled with the `--unsafe-fixes` option).

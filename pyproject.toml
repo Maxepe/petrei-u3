@@ -23,6 +23,10 @@ max-complexity = 10
 # assert y valores literales son propios de un test
 "tests/*" = ["S101", "PLR2004"]
 
+[tool.coverage.run]
+# rutas relativas en coverage.xml: SonarQube analiza desde otro sistema de archivos
+relative_files = true
+
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 addopts = "--cov=tienda --cov-branch --cov-report=term-missing --cov-report=json --cov-report=xml --cov-report=html --cov-fail-under=80"

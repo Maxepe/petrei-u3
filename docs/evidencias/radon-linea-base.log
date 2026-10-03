@@ -1,0 +1,18 @@
+# git checkout linea-base
+$ radon cc -s -a src
+src\tienda\credito.py
+    F 1:0 evaluar_solicitud_credito - A (4)
+src\tienda\descuentos.py
+    F 1:0 calcular_descuento - A (3)
+src\tienda\pedidos.py
+    F 9:0 procesar_pedido - D (21)
+    F 73:0 calcular_presupuesto - C (16)
+
+4 blocks (classes, functions, methods) analyzed.
+Average complexity: C (11.0)
+
+$ radon mi -s src
+src\tienda\credito.py - A (99.24)
+src\tienda\descuentos.py - A (94.56)
+src\tienda\pedidos.py - A (28.37)
+src\tienda\__init__.py - A (100.00)
