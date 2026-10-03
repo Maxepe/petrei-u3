@@ -1,0 +1,27 @@
+$ radon cc -s -a src
+src\tienda\credito.py
+    F 5:0 evaluar_solicitud_credito - A (4)
+src\tienda\descuentos.py
+    F 1:0 calcular_descuento - A (3)
+src\tienda\pedidos.py
+    F 63:0 calcular_importe_item - A (3)
+    F 80:0 aplicar_cupon - A (3)
+    C 27:0 TarifaEnvio - A (3)
+    F 71:0 calcular_subtotal - A (2)
+    F 75:0 calcular_envio - A (2)
+    M 32:4 TarifaEnvio.costo - A (2)
+    F 87:0 _total_con_descuento_de_cliente - A (1)
+    F 92:0 calcular_presupuesto - A (1)
+    F 97:0 procesar_pedido - A (1)
+    F 111:0 crear_notificador_webhook - A (1)
+    C 21:0 ReglaVolumen - A (1)
+    C 39:0 Cupon - A (1)
+
+14 blocks (classes, functions, methods) analyzed.
+Average complexity: A (2.0)
+
+$ radon mi -s src
+src\tienda\credito.py - A (97.67)
+src\tienda\descuentos.py - A (94.56)
+src\tienda\pedidos.py - A (47.59)
+src\tienda\__init__.py - A (100.00)

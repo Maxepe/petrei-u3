@@ -1,0 +1,36 @@
+# git checkout linea-base
+# PyYAML 5.3.1 no compila en Python 3.14: se audita el manifiesto sin instalarlo
+$ pip-audit -r requirements.txt --no-deps --disable-pip
+Found 30 known vulnerabilities in 3 packages
+Name     Version ID              Fix Versions
+-------- ------- --------------- -------------
+pyyaml   5.3.1   PYSEC-2021-142  5.4
+pyyaml   5.3.1   PYSEC-2021-142  5.4
+requests 2.25.1  PYSEC-2023-74   2.31.0
+requests 2.25.1  PYSEC-2023-74   2.31.0
+requests 2.25.1  PYSEC-2026-1873 2.32.0
+requests 2.25.1  PYSEC-2026-1872 2.32.4
+requests 2.25.1  PYSEC-2026-2275 2.33.0
+requests 2.25.1  PYSEC-2026-1873 2.32.0
+requests 2.25.1  PYSEC-2026-1872 2.32.4
+requests 2.25.1  PYSEC-2026-2275 2.33.0
+urllib3  1.26.4  PYSEC-2021-108  1.26.5
+urllib3  1.26.4  PYSEC-2021-108  1.26.5
+urllib3  1.26.4  PYSEC-2026-1995 1.26.19,2.2.2
+urllib3  1.26.4  PYSEC-2023-192  1.26.17,2.0.6
+urllib3  1.26.4  PYSEC-2023-192  1.26.17,2.0.6
+urllib3  1.26.4  PYSEC-2023-212  1.26.18,2.0.7
+urllib3  1.26.4  PYSEC-2023-212  1.26.18,2.0.7
+urllib3  1.26.4  PYSEC-2026-1999 2.5.0
+urllib3  1.26.4  PYSEC-2026-1998 2.6.0
+urllib3  1.26.4  PYSEC-2026-1994 2.6.0
+urllib3  1.26.4  PYSEC-2026-1996 2.6.3
+urllib3  1.26.4  PYSEC-2026-141  2.7.0
+urllib3  1.26.4  PYSEC-2026-141  2.7.0
+urllib3  1.26.4  PYSEC-2026-1999 2.5.0
+urllib3  1.26.4  PYSEC-2026-1998 2.6.0
+urllib3  1.26.4  PYSEC-2026-1995 1.26.19,2.2.2
+urllib3  1.26.4  PYSEC-2026-1994 2.6.0
+urllib3  1.26.4  PYSEC-2026-1996 2.6.3
+urllib3  1.26.4  PYSEC-2026-4177 2.8.0
+urllib3  1.26.4  PYSEC-2026-4175 2.8.0

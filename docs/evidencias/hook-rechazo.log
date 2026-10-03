@@ -1,0 +1,616 @@
+$ git commit -m "actualiza dependencias vulnerables"
+==> [1/3] Formatter: black --check
+All done! \u2728 \U0001f370 \u2728
+6 files would be left unchanged.
+==> [2/3] Linter: ruff check
+PLR2004 Magic value used in comparison, consider replacing `18` with a constant variable
+ --> src\tienda\credito.py:7:17
+  |
+5 |     Estructura condicional compleja que requiere evaluación de ramas.
+6 |     """
+7 |     if (edad >= 18 and ingresos >= 150000) or posee_garantia:
+  |                 ^^
+8 |         return "CRÉDITO APROBADO"
+9 |     else:
+  |
+
+PLR2004 Magic value used in comparison, consider replacing `150000` with a constant variable
+ --> src\tienda\credito.py:7:36
+  |
+5 |     Estructura condicional compleja que requiere evaluación de ramas.
+6 |     """
+7 |     if (edad >= 18 and ingresos >= 150000) or posee_garantia:
+  |                                    ^^^^^^
+8 |         return "CRÉDITO APROBADO"
+9 |     else:
+  |
+
+F401 [*] `os` imported but unused
+ --> src\tienda\pedidos.py:1:8
+  |
+1 | import os
+  |        ^^
+2 | import json
+3 | import yaml
+  |
+help: Remove unused import: `os`
+  |
+  - import os
+1 | import json
+  |
+
+C901 `procesar_pedido` is too complex (21 > 10)
+  --> src\tienda\pedidos.py:9:5
+   |
+ 9 | def procesar_pedido(pedido, cliente, tipo_envio, cupon):
+   |     ^^^^^^^^^^^^^^^
+10 |     config = yaml.load(open(CONFIG_PATH))
+11 |     total = 0
+   |
+
+PLR0912 Too many branches (31 > 12)
+  --> src\tienda\pedidos.py:9:5
+   |
+ 9 | def procesar_pedido(pedido, cliente, tipo_envio, cupon):
+   |     ^^^^^^^^^^^^^^^
+10 |     config = yaml.load(open(CONFIG_PATH))
+11 |     total = 0
+   |
+
+PLR0915 Too many statements (55 > 50)
+  --> src\tienda\pedidos.py:9:5
+   |
+ 9 | def procesar_pedido(pedido, cliente, tipo_envio, cupon):
+   |     ^^^^^^^^^^^^^^^
+10 |     config = yaml.load(open(CONFIG_PATH))
+11 |     total = 0
+   |
+
+S506 Probable use of unsafe `yaml.load`. Allows instantiation of arbitrary objects. Consider `yaml.safe_load`.
+  --> src\tienda\pedidos.py:10:14
+   |
+ 9 | def procesar_pedido(pedido, cliente, tipo_envio, cupon):
+10 |     config = yaml.load(open(CONFIG_PATH))
+   |              ^^^^^^^^^
+11 |     total = 0
+12 |     for item in pedido["items"]:
+   |
+
+SIM115 Use a context manager for opening files
+  --> src\tienda\pedidos.py:10:24
+   |
+ 9 | def procesar_pedido(pedido, cliente, tipo_envio, cupon):
+10 |     config = yaml.load(open(CONFIG_PATH))
+   |                        ^^^^
+11 |     total = 0
+12 |     for item in pedido["items"]:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `10` with a constant variable
+  --> src\tienda\pedidos.py:14:36
+   |
+12 |     for item in pedido["items"]:
+13 |         if item["categoria"] == "electronica":
+14 |             if item["cantidad"] >= 10:
+   |                                    ^^
+15 |                 total = total + item["precio"] * item["cantidad"] * 0.90
+16 |             else:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `5` with a constant variable
+  --> src\tienda\pedidos.py:19:36
+   |
+17 |                 total = total + item["precio"] * item["cantidad"]
+18 |         elif item["categoria"] == "ropa":
+19 |             if item["cantidad"] >= 5:
+   |                                    ^
+20 |                 total = total + item["precio"] * item["cantidad"] * 0.85
+21 |             else:
+   |
+
+SIM108 Use ternary operator `total = total - total * 0.2 if cliente["es_vip"] == True else total - total * 0.05` instead of `if`-`else`-block
+  --> src\tienda\pedidos.py:27:5
+   |
+25 |           else:
+26 |               total = total + item["precio"] * item["cantidad"]
+27 | /     if cliente["es_vip"] == True:
+28 | |         total = total - total * 0.20
+29 | |     else:
+30 | |         total = total - total * 0.05
+   | |____________________________________^
+31 |       if tipo_envio == "express":
+32 |           if cliente["provincia"] == "Buenos Aires":
+   |
+help: Replace `if`-`else`-block with `total = total - total * 0.2 if cliente["es_vip"] == True else total - total * 0.05`
+
+E712 Avoid equality comparisons to `True`; use `cliente["es_vip"]:` for truth checks
+  --> src\tienda\pedidos.py:27:8
+   |
+25 |         else:
+26 |             total = total + item["precio"] * item["cantidad"]
+27 |     if cliente["es_vip"] == True:
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+28 |         total = total - total * 0.20
+29 |     else:
+   |
+help: Replace with `cliente["es_vip"]`
+
+SIM108 Use ternary operator `envio = 0 if total > 100000 else 3000` instead of `if`-`else`-block
+  --> src\tienda\pedidos.py:33:13
+   |
+31 |       if tipo_envio == "express":
+32 |           if cliente["provincia"] == "Buenos Aires":
+33 | /             if total > 100000:
+34 | |                 envio = 0
+35 | |             else:
+36 | |                 envio = 3000
+   | |____________________________^
+37 |           else:
+38 |               if total > 100000:
+   |
+help: Replace `if`-`else`-block with `envio = 0 if total > 100000 else 3000`
+
+PLR2004 Magic value used in comparison, consider replacing `100000` with a constant variable
+  --> src\tienda\pedidos.py:33:24
+   |
+31 |     if tipo_envio == "express":
+32 |         if cliente["provincia"] == "Buenos Aires":
+33 |             if total > 100000:
+   |                        ^^^^^^
+34 |                 envio = 0
+35 |             else:
+   |
+
+PLR5501 [*] Use `elif` instead of `else` then `if`, to reduce indentation
+  --> src\tienda\pedidos.py:37:9
+   |
+35 |               else:
+36 |                   envio = 3000
+37 | /         else:
+38 | |             if total > 100000:
+   | |____________^
+39 |                   envio = 2000
+40 |               else:
+   |
+help: Convert to `elif`
+   |
+36 |                 envio = 3000
+37 +         elif total > 100000:
+38 +             envio = 2000
+39 |         else:
+   -             if total > 100000:
+   -                 envio = 2000
+   -             else:
+   -                 envio = 5000
+40 +             envio = 5000
+41 |     elif tipo_envio == "normal":
+   |
+
+SIM108 Use ternary operator `envio = 2000 if total > 100000 else 5000` instead of `if`-`else`-block
+  --> src\tienda\pedidos.py:38:13
+   |
+36 |                   envio = 3000
+37 |           else:
+38 | /             if total > 100000:
+39 | |                 envio = 2000
+40 | |             else:
+41 | |                 envio = 5000
+   | |____________________________^
+42 |       elif tipo_envio == "normal":
+43 |           if cliente["provincia"] == "Buenos Aires":
+   |
+help: Replace `if`-`else`-block with `envio = 2000 if total > 100000 else 5000`
+
+PLR2004 Magic value used in comparison, consider replacing `100000` with a constant variable
+  --> src\tienda\pedidos.py:38:24
+   |
+36 |                 envio = 3000
+37 |         else:
+38 |             if total > 100000:
+   |                        ^^^^^^
+39 |                 envio = 2000
+40 |             else:
+   |
+
+SIM108 Use ternary operator `envio = 0 if total > 50000 else 1500` instead of `if`-`else`-block
+  --> src\tienda\pedidos.py:44:13
+   |
+42 |       elif tipo_envio == "normal":
+43 |           if cliente["provincia"] == "Buenos Aires":
+44 | /             if total > 50000:
+45 | |                 envio = 0
+46 | |             else:
+47 | |                 envio = 1500
+   | |____________________________^
+48 |           else:
+49 |               if total > 50000:
+   |
+help: Replace `if`-`else`-block with `envio = 0 if total > 50000 else 1500`
+
+PLR2004 Magic value used in comparison, consider replacing `50000` with a constant variable
+  --> src\tienda\pedidos.py:44:24
+   |
+42 |     elif tipo_envio == "normal":
+43 |         if cliente["provincia"] == "Buenos Aires":
+44 |             if total > 50000:
+   |                        ^^^^^
+45 |                 envio = 0
+46 |             else:
+   |
+
+PLR5501 [*] Use `elif` instead of `else` then `if`, to reduce indentation
+  --> src\tienda\pedidos.py:48:9
+   |
+46 |               else:
+47 |                   envio = 1500
+48 | /         else:
+49 | |             if total > 50000:
+   | |____________^
+50 |                   envio = 1000
+51 |               else:
+   |
+help: Convert to `elif`
+   |
+47 |                 envio = 1500
+48 +         elif total > 50000:
+49 +             envio = 1000
+50 |         else:
+   -             if total > 50000:
+   -                 envio = 1000
+   -             else:
+   -                 envio = 2500
+51 +             envio = 2500
+52 |     else:
+   |
+
+SIM108 Use ternary operator `envio = 1000 if total > 50000 else 2500` instead of `if`-`else`-block
+  --> src\tienda\pedidos.py:49:13
+   |
+47 |                   envio = 1500
+48 |           else:
+49 | /             if total > 50000:
+50 | |                 envio = 1000
+51 | |             else:
+52 | |                 envio = 2500
+   | |____________________________^
+53 |       else:
+54 |           envio = 0
+   |
+help: Replace `if`-`else`-block with `envio = 1000 if total > 50000 else 2500`
+
+PLR2004 Magic value used in comparison, consider replacing `50000` with a constant variable
+  --> src\tienda\pedidos.py:49:24
+   |
+47 |                 envio = 1500
+48 |         else:
+49 |             if total > 50000:
+   |                        ^^^^^
+50 |                 envio = 1000
+51 |             else:
+   |
+
+E711 Comparison to `None` should be `cond is not None`
+  --> src\tienda\pedidos.py:55:17
+   |
+53 |     else:
+54 |         envio = 0
+55 |     if cupon != None:
+   |                 ^^^^
+56 |         if cupon == "DESC10":
+57 |             total = total - total * 0.10
+   |
+help: Replace with `cond is not None`
+
+SIM102 Use a single `if` statement instead of nested `if` statements
+  --> src\tienda\pedidos.py:58:9
+   |
+56 |           if cupon == "DESC10":
+57 |               total = total - total * 0.10
+58 | /         elif cupon == "DESC20":
+59 | |             if total > 20000:
+   | |_____________________________^
+60 |                   total = total - total * 0.20
+61 |       total = total + envio
+   |
+help: Combine `if` statements using `and`
+
+PLR2004 Magic value used in comparison, consider replacing `20000` with a constant variable
+  --> src\tienda\pedidos.py:59:24
+   |
+57 |             total = total - total * 0.10
+58 |         elif cupon == "DESC20":
+59 |             if total > 20000:
+   |                        ^^^^^
+60 |                 total = total - total * 0.20
+61 |     total = total + envio
+   |
+
+SIM105 Use `contextlib.suppress(BaseException)` instead of `try`-`except`-`pass`
+  --> src\tienda\pedidos.py:62:5
+   |
+60 |                   total = total - total * 0.20
+61 |       total = total + envio
+62 | /     try:
+63 | |         requests.post(
+64 | |             config["webhook_url"],
+65 | |             data=json.dumps({"cliente": cliente["id"], "total": total}),
+66 | |             verify=False,
+67 | |         )
+68 | |     except:
+69 | |         pass
+   | |____________^
+70 |       return total
+   |
+help: Replace `try`-`except`-`pass` with `with contextlib.suppress(BaseException): ...`
+
+S113 Probable use of `requests` call without timeout
+  --> src\tienda\pedidos.py:63:9
+   |
+61 |     total = total + envio
+62 |     try:
+63 |         requests.post(
+   |         ^^^^^^^^^^^^^
+64 |             config["webhook_url"],
+65 |             data=json.dumps({"cliente": cliente["id"], "total": total}),
+   |
+
+S501 Probable use of `requests` call with `verify=False` disabling SSL certificate checks
+  --> src\tienda\pedidos.py:66:13
+   |
+64 |             config["webhook_url"],
+65 |             data=json.dumps({"cliente": cliente["id"], "total": total}),
+66 |             verify=False,
+   |             ^^^^^^^^^^^^
+67 |         )
+68 |     except:
+   |
+
+E722 Do not use bare `except`
+  --> src\tienda\pedidos.py:68:5
+   |
+66 |             verify=False,
+67 |         )
+68 |     except:
+   |     ^^^^^^
+69 |         pass
+70 |     return total
+   |
+
+S110 `try`-`except`-`pass` detected, consider logging the exception
+  --> src\tienda\pedidos.py:68:5
+   |
+66 |               verify=False,
+67 |           )
+68 | /     except:
+69 | |         pass
+   | |____________^
+70 |       return total
+   |
+
+C901 `calcular_presupuesto` is too complex (16 > 10)
+  --> src\tienda\pedidos.py:73:5
+   |
+73 | def calcular_presupuesto(pedido, cliente, tipo_envio):
+   |     ^^^^^^^^^^^^^^^^^^^^
+74 |     total = 0
+75 |     for item in pedido["items"]:
+   |
+
+PLR0912 Too many branches (26 > 12)
+  --> src\tienda\pedidos.py:73:5
+   |
+73 | def calcular_presupuesto(pedido, cliente, tipo_envio):
+   |     ^^^^^^^^^^^^^^^^^^^^
+74 |     total = 0
+75 |     for item in pedido["items"]:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `10` with a constant variable
+  --> src\tienda\pedidos.py:77:36
+   |
+75 |     for item in pedido["items"]:
+76 |         if item["categoria"] == "electronica":
+77 |             if item["cantidad"] >= 10:
+   |                                    ^^
+78 |                 total = total + item["precio"] * item["cantidad"] * 0.90
+79 |             else:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `5` with a constant variable
+  --> src\tienda\pedidos.py:82:36
+   |
+80 |                 total = total + item["precio"] * item["cantidad"]
+81 |         elif item["categoria"] == "ropa":
+82 |             if item["cantidad"] >= 5:
+   |                                    ^
+83 |                 total = total + item["precio"] * item["cantidad"] * 0.85
+84 |             else:
+   |
+
+SIM108 Use ternary operator `total = total - total * 0.2 if cliente["es_vip"] == True else total - total * 0.05` instead of `if`-`else`-block
+  --> src\tienda\pedidos.py:90:5
+   |
+88 |           else:
+89 |               total = total + item["precio"] * item["cantidad"]
+90 | /     if cliente["es_vip"] == True:
+91 | |         total = total - total * 0.20
+92 | |     else:
+93 | |         total = total - total * 0.05
+   | |____________________________________^
+94 |       if tipo_envio == "express":
+95 |           if cliente["provincia"] == "Buenos Aires":
+   |
+help: Replace `if`-`else`-block with `total = total - total * 0.2 if cliente["es_vip"] == True else total - total * 0.05`
+
+E712 Avoid equality comparisons to `True`; use `cliente["es_vip"]:` for truth checks
+  --> src\tienda\pedidos.py:90:8
+   |
+88 |         else:
+89 |             total = total + item["precio"] * item["cantidad"]
+90 |     if cliente["es_vip"] == True:
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+91 |         total = total - total * 0.20
+92 |     else:
+   |
+help: Replace with `cliente["es_vip"]`
+
+SIM108 Use ternary operator `envio = 0 if total > 100000 else 3000` instead of `if`-`else`-block
+   --> src\tienda\pedidos.py:96:13
+    |
+ 94 |       if tipo_envio == "express":
+ 95 |           if cliente["provincia"] == "Buenos Aires":
+ 96 | /             if total > 100000:
+ 97 | |                 envio = 0
+ 98 | |             else:
+ 99 | |                 envio = 3000
+    | |____________________________^
+100 |           else:
+101 |               if total > 100000:
+    |
+help: Replace `if`-`else`-block with `envio = 0 if total > 100000 else 3000`
+
+PLR2004 Magic value used in comparison, consider replacing `100000` with a constant variable
+  --> src\tienda\pedidos.py:96:24
+   |
+94 |     if tipo_envio == "express":
+95 |         if cliente["provincia"] == "Buenos Aires":
+96 |             if total > 100000:
+   |                        ^^^^^^
+97 |                 envio = 0
+98 |             else:
+   |
+
+PLR5501 [*] Use `elif` instead of `else` then `if`, to reduce indentation
+   --> src\tienda\pedidos.py:100:9
+    |
+ 98 |               else:
+ 99 |                   envio = 3000
+100 | /         else:
+101 | |             if total > 100000:
+    | |____________^
+102 |                   envio = 2000
+103 |               else:
+    |
+help: Convert to `elif`
+    |
+99  |                 envio = 3000
+100 +         elif total > 100000:
+101 +             envio = 2000
+102 |         else:
+    -             if total > 100000:
+    -                 envio = 2000
+    -             else:
+    -                 envio = 5000
+103 +             envio = 5000
+104 |     elif tipo_envio == "normal":
+    |
+
+SIM108 Use ternary operator `envio = 2000 if total > 100000 else 5000` instead of `if`-`else`-block
+   --> src\tienda\pedidos.py:101:13
+    |
+ 99 |                   envio = 3000
+100 |           else:
+101 | /             if total > 100000:
+102 | |                 envio = 2000
+103 | |             else:
+104 | |                 envio = 5000
+    | |____________________________^
+105 |       elif tipo_envio == "normal":
+106 |           if cliente["provincia"] == "Buenos Aires":
+    |
+help: Replace `if`-`else`-block with `envio = 2000 if total > 100000 else 5000`
+
+PLR2004 Magic value used in comparison, consider replacing `100000` with a constant variable
+   --> src\tienda\pedidos.py:101:24
+    |
+ 99 |                 envio = 3000
+100 |         else:
+101 |             if total > 100000:
+    |                        ^^^^^^
+102 |                 envio = 2000
+103 |             else:
+    |
+
+SIM108 Use ternary operator `envio = 0 if total > 50000 else 1500` instead of `if`-`else`-block
+   --> src\tienda\pedidos.py:107:13
+    |
+105 |       elif tipo_envio == "normal":
+106 |           if cliente["provincia"] == "Buenos Aires":
+107 | /             if total > 50000:
+108 | |                 envio = 0
+109 | |             else:
+110 | |                 envio = 1500
+    | |____________________________^
+111 |           else:
+112 |               if total > 50000:
+    |
+help: Replace `if`-`else`-block with `envio = 0 if total > 50000 else 1500`
+
+PLR2004 Magic value used in comparison, consider replacing `50000` with a constant variable
+   --> src\tienda\pedidos.py:107:24
+    |
+105 |     elif tipo_envio == "normal":
+106 |         if cliente["provincia"] == "Buenos Aires":
+107 |             if total > 50000:
+    |                        ^^^^^
+108 |                 envio = 0
+109 |             else:
+    |
+
+PLR5501 [*] Use `elif` instead of `else` then `if`, to reduce indentation
+   --> src\tienda\pedidos.py:111:9
+    |
+109 |               else:
+110 |                   envio = 1500
+111 | /         else:
+112 | |             if total > 50000:
+    | |____________^
+113 |                   envio = 1000
+114 |               else:
+    |
+help: Convert to `elif`
+    |
+110 |                 envio = 1500
+111 +         elif total > 50000:
+112 +             envio = 1000
+113 |         else:
+    -             if total > 50000:
+    -                 envio = 1000
+    -             else:
+    -                 envio = 2500
+114 +             envio = 2500
+115 |     else:
+    |
+
+SIM108 Use ternary operator `envio = 1000 if total > 50000 else 2500` instead of `if`-`else`-block
+   --> src\tienda\pedidos.py:112:13
+    |
+110 |                   envio = 1500
+111 |           else:
+112 | /             if total > 50000:
+113 | |                 envio = 1000
+114 | |             else:
+115 | |                 envio = 2500
+    | |____________________________^
+116 |       else:
+117 |           envio = 0
+    |
+help: Replace `if`-`else`-block with `envio = 1000 if total > 50000 else 2500`
+
+PLR2004 Magic value used in comparison, consider replacing `50000` with a constant variable
+   --> src\tienda\pedidos.py:112:24
+    |
+110 |                 envio = 1500
+111 |         else:
+112 |             if total > 50000:
+    |                        ^^^^^
+113 |                 envio = 1000
+114 |             else:
+    |
+
+Found 46 errors.
+[*] 5 fixable with the `--fix` option (15 hidden fixes can be enabled with the `--unsafe-fixes` option).
+
+pre-commit: COMMIT ABORTADO en la etapa 'Linter'.
+Los cambios siguen en el área de preparación; corregí y volvé a ejecutar git commit.
+[exit code: 1]
